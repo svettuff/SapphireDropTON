@@ -19,12 +19,12 @@ import eyeGif from './gifs/eye.gif';
 import roseGif from './gifs/rose.gif';
 
 const rewards = [
-    { type: 'calendar', img: calendar, gif: calendarGif, price: '280+'   },
-    { type: 'candy',    img: candy,    gif: candyGif,    price: '330+'   },
-    { type: 'hatt',     img: hatt,     gif: hattGif,     price: '550+'   },
-    { type: 'drink',    img: drink,    gif: drinkGif,    price: '700+'  },
-    { type: 'eye',      img: eye,      gif: eyeGif,      price: '1200+'  },
-    { type: 'rose',     img: rose,     gif: roseGif,     price: '5000+' },
+    { type: 'calendar', img: calendar, gif: calendarGif, price: '2.2+'   },
+    { type: 'candy',    img: candy,    gif: candyGif,    price: '2.5+'   },
+    { type: 'hatt',     img: hatt,     gif: hattGif,     price: '3+'   },
+    { type: 'drink',    img: drink,    gif: drinkGif,    price: '4.2+'  },
+    { type: 'eye',      img: eye,      gif: eyeGif,      price: '5.5+'  },
+    { type: 'rose',     img: rose,     gif: roseGif,     price: '24+' },
 ];
 
 const randomReward = () => rewards[Math.floor(Math.random() * rewards.length)];
@@ -196,7 +196,7 @@ function SpinUniqueCollectible({ onBack }) {
             </div>
 
             <button className="spin-button" disabled={spinning}>
-                {spinning ? 'Spinning…' : 'Unlock for 500'}
+                {spinning ? 'Spinning…' : 'Unlock for 3'}
                 {!spinning && (
                     <img src={ton} alt="ton" className="ton-icon-button" />
                 )}

@@ -19,12 +19,12 @@ import diamondGif from './gifs/diamond.gif';
 import hatGif from './gifs/hat.gif';
 
 const rewards = [
-    { type: 'teddy',   img: teddy,   gif: teddyGif,   price: 15   },
-    { type: 'gift',    img: gift,    gif: giftGif,    price: 25   },
-    { type: 'flowers', img: flowers, gif: flowersGif, price: 50   },
-    { type: 'trophy',  img: trophy,  gif: trophyGif,  price: 100  },
-    { type: 'diamond', img: diamond, gif: diamondGif, price: 100  },
-    { type: 'hat',     img: hat,     gif: hatGif,     price: '650+' },
+    { type: 'teddy',   img: teddy,   gif: teddyGif,   price: 0.08  },
+    { type: 'gift',    img: gift,    gif: giftGif,    price: 0.13  },
+    { type: 'flowers', img: flowers, gif: flowersGif, price: 0.25  },
+    { type: 'trophy',  img: trophy,  gif: trophyGif,  price: 0.5  },
+    { type: 'diamond', img: diamond, gif: diamondGif, price: 0.5  },
+    { type: 'hat',     img: hat,     gif: hatGif,     price: '5+' },
 ];
 
 const randomReward = () => rewards[Math.floor(Math.random() * rewards.length)];
@@ -196,7 +196,7 @@ export default function SpinStandard({ onBack }) {
             </div>
 
             <button className="spin-button" disabled={spinning}>
-                {spinning ? 'Spinning…' : 'Unlock for 30'}
+                {spinning ? 'Spinning…' : 'Unlock for 0.15'}
                 {!spinning && (
                     <img src={ton} alt="ton" className="ton-icon-button" />
                 )}

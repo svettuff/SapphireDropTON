@@ -143,7 +143,7 @@ function Balance() {
             <div className="balance-block">
                 <div className="balance-price">
                     <img src={ton} alt="TON" className="balance-ton-icon" />
-                    <span className="balance-count">{tons.toFixed(1)}</span>
+                    <span className="balance-count">{tons.toFixed(2)}</span>
                 </div>
 
                 <button
@@ -214,7 +214,7 @@ function Menu({ onStandard, onUniqueCollectible }) {
                 <div className="gift-label-container">
                     <h1 className="label">Unlock Collectible</h1>
                     <div className="gift-price">
-                        <img src={ton} alt="" className="gift-price-ton-icon" />2.5
+                        <img src={ton} alt="" className="gift-price-ton-icon" />3
                     </div>
                 </div>
             </div>
