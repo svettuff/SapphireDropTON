@@ -390,12 +390,13 @@ body {
 
 .balance-plus-button {
   position: relative;
-  width: 10px;
+  width: 40px;
   height: 40px;
   border-radius: 50%;
   background: #2a2e45;
   cursor: pointer;
   outline: none;
+  border: none;
 }
 
 .balance-plus-button::before,
