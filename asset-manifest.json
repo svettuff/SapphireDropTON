@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/SapphireDropTON/static/css/main.27e54855.css",
-    "main.js": "/SapphireDropTON/static/js/main.f3f7a20d.js",
+    "main.css": "/SapphireDropTON/static/css/main.b839f269.css",
+    "main.js": "/SapphireDropTON/static/js/main.967bcd72.js",
     "static/media/rose.gif": "/SapphireDropTON/static/media/rose.9b1fbe3aeaa02546959d.gif",
     "static/media/flowers.gif": "/SapphireDropTON/static/media/flowers.c210d18c3a7fa2dd6824.gif",
     "static/media/teddy.gif": "/SapphireDropTON/static/media/teddy.13edee4b70086beb4118.gif",
@@ -27,16 +27,15 @@
     "static/media/gift.webp": "/SapphireDropTON/static/media/gift.c49ba5b030ea73f9866d.webp",
     "static/media/teddy.webp": "/SapphireDropTON/static/media/teddy.9a02809e1a4f2b82c119.webp",
     "static/media/trophy.webp": "/SapphireDropTON/static/media/trophy.29eeafb79984db450e1d.webp",
-    "static/media/loading.gif": "/SapphireDropTON/static/media/loading.e1d43bd65e031e61b44b.gif",
     "static/media/candy.webp": "/SapphireDropTON/static/media/candy.1e457332bec10b716033.webp",
     "static/media/eye.webp": "/SapphireDropTON/static/media/eye.5af769d752b3e3bb8c03.webp",
     "static/media/diamond.webp": "/SapphireDropTON/static/media/diamond.c2cf2e02a7e93dfbc380.webp",
     "index.html": "/SapphireDropTON/index.html",
-    "main.27e54855.css.map": "/SapphireDropTON/static/css/main.27e54855.css.map",
-    "main.f3f7a20d.js.map": "/SapphireDropTON/static/js/main.f3f7a20d.js.map"
+    "main.b839f269.css.map": "/SapphireDropTON/static/css/main.b839f269.css.map",
+    "main.967bcd72.js.map": "/SapphireDropTON/static/js/main.967bcd72.js.map"
   },
   "entrypoints": [
-    "static/css/main.27e54855.css",
-    "static/js/main.f3f7a20d.js"
+    "static/css/main.b839f269.css",
+    "static/js/main.967bcd72.js"
   ]
 }
