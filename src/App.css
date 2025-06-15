@@ -269,6 +269,12 @@ body {
   cursor: pointer;
 }
 
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
 .modal-text {
   font-size: 1rem;
   color: #ccc;
