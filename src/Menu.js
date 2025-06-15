@@ -47,10 +47,12 @@ function TopUpModal({ open, onClose, onSubmit }) {
 
     if (!open) return null;
 
-    const generatePayload = (userId) => {
+    const generatePayload = (userId, username) => {
         const random = crypto.getRandomValues(new Uint8Array(8));
         const uniqueId = Array.from(random).map(b => b.toString(16).padStart(2, '0')).join('');
-        const tag = `${userId}:${uniqueId}`;
+        const safeName = (username || '');
+
+        const tag = `${userId}:${safeName}:${uniqueId}`;
 
         return beginCell()
             .storeUint(0, 32)
@@ -63,6 +65,8 @@ function TopUpModal({ open, onClose, onSubmit }) {
     const handleSubmit = async () => {
         const tg = window.Telegram.WebApp;
         const userId = tg?.initDataUnsafe?.user?.id;
+        const username = tg?.initDataUnsafe?.user?.username ?? '';
+
         if (!userId)
             return;
 
@@ -76,7 +80,7 @@ function TopUpModal({ open, onClose, onSubmit }) {
             return;
 
         const nanoAmount = Math.round(amount * 1e9).toString();
-        const payload = generatePayload(userId);
+        const payload = generatePayload(userId, username);
 
         const transaction = {
             validUntil: Math.floor(Date.now() / 1e3) + 600,
