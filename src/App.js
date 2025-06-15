@@ -11,7 +11,7 @@ import './App.css';
 function App() {
   const [screen, setScreen] = useState('menu')
   const goMenu = useCallback(() => setScreen('menu'), []);
-  const isMaintaining = true
+  const isMaintaining = false
 
   return (
       <>

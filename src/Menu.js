@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useTonConnectUI } from '@tonconnect/ui-react';
 
+import { beginCell } from '@ton/core';
+
 import gift1 from './assets/gift-colored.webp'
 import gift2 from './assets/gift-gold.webp'
 
@@ -45,6 +47,19 @@ function TopUpModal({ open, onClose, onSubmit }) {
 
     if (!open) return null;
 
+    const generatePayload = (userId) => {
+        const random = crypto.getRandomValues(new Uint8Array(8));
+        const uniqueId = Array.from(random).map(b => b.toString(16).padStart(2, '0')).join('');
+        const tag = `${userId}:${uniqueId}`;
+
+        return beginCell()
+            .storeUint(0, 32)
+            .storeStringTail(tag)
+            .endCell()
+            .toBoc()
+            .toString('base64');
+    };
+
     const handleSubmit = async () => {
         const tg = window.Telegram.WebApp;
         const userId = tg?.initDataUnsafe?.user?.id;
@@ -61,6 +76,7 @@ function TopUpModal({ open, onClose, onSubmit }) {
             return;
 
         const nanoAmount = Math.round(amount * 1e9).toString();
+        const payload = generatePayload(userId);
 
         const transaction = {
             validUntil: Math.floor(Date.now() / 1e3) + 600,
@@ -68,6 +84,7 @@ function TopUpModal({ open, onClose, onSubmit }) {
                 {
                     address: "UQA5PajFfxGphZ86hqDt7Fp3jccE40r49AJxy64gl8LqTLJA",
                     amount: nanoAmount,
+                    payload: payload
                 }
             ]
         };
