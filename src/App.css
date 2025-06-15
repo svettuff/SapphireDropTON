@@ -1,12 +1,12 @@
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background-color: #1a1d2e;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 100%;
+  margin-top: 25px;
 }
 
 .container {
@@ -432,6 +432,13 @@ body {
 
 /* Top-Up Modal */
 
+.modal.topup-modal {
+  position: fixed;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .topup-modal h2 {
   margin-top: 0;
 }
@@ -482,6 +489,7 @@ body {
   -webkit-appearance: none;
   margin: 0;
 }
+
 .topup-input[type="number"] {
   -moz-appearance: textfield;
 }
