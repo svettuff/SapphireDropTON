@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/SapphireDropTON/static/css/main.d9b93f66.css",
-    "main.js": "/SapphireDropTON/static/js/main.927a0bd9.js",
+    "main.js": "/SapphireDropTON/static/js/main.23e07a85.js",
     "static/media/rose.gif": "/SapphireDropTON/static/media/rose.9b1fbe3aeaa02546959d.gif",
     "static/media/flowers.gif": "/SapphireDropTON/static/media/flowers.c210d18c3a7fa2dd6824.gif",
     "static/media/teddy.gif": "/SapphireDropTON/static/media/teddy.13edee4b70086beb4118.gif",
@@ -32,10 +32,10 @@
     "static/media/diamond.webp": "/SapphireDropTON/static/media/diamond.c2cf2e02a7e93dfbc380.webp",
     "index.html": "/SapphireDropTON/index.html",
     "main.d9b93f66.css.map": "/SapphireDropTON/static/css/main.d9b93f66.css.map",
-    "main.927a0bd9.js.map": "/SapphireDropTON/static/js/main.927a0bd9.js.map"
+    "main.23e07a85.js.map": "/SapphireDropTON/static/js/main.23e07a85.js.map"
   },
   "entrypoints": [
     "static/css/main.d9b93f66.css",
-    "static/js/main.927a0bd9.js"
+    "static/js/main.23e07a85.js"
   ]
 }
