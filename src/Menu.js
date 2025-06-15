@@ -204,7 +204,8 @@ function Menu({ onStandard, onUniqueCollectible }) {
                 <div className="gift-label-container">
                     <h1 className="label">Unlock Standard</h1>
                     <div className="gift-price">
-                        <img src={ton} alt="" className="gift-price-ton-icon" />0.15
+                        <img src={ton} alt="" className="gift-price-ton-icon" />
+                        <span className="gift-price-value">0.15</span>
                     </div>
                 </div>
             </div>
@@ -214,7 +215,8 @@ function Menu({ onStandard, onUniqueCollectible }) {
                 <div className="gift-label-container">
                     <h1 className="label">Unlock Collectible</h1>
                     <div className="gift-price">
-                        <img src={ton} alt="" className="gift-price-ton-icon" />3
+                        <img src={ton} alt="" className="gift-price-ton-icon" />
+                        <span className="gift-price-value">3</span>
                     </div>
                 </div>
             </div>
