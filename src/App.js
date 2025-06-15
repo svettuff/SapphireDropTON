@@ -4,14 +4,15 @@ import Menu from './Menu'
 import SpinStandard from './SpinStandard'
 import SpinUniqueCollectible from './SpinUniqueCollectible'
 
-import loadingGif from './gifs/loading.gif';
+import { Helix } from 'ldrs/react'
+import 'ldrs/react/Helix.css'
 
 import './App.css';
 
 function App() {
   const [screen, setScreen] = useState('menu')
   const goMenu = useCallback(() => setScreen('menu'), []);
-  const isMaintaining = false
+  const isMaintaining = true
 
   return (
       <>
@@ -19,7 +20,11 @@ function App() {
             <div className="maintenance-overlay">
               <div className="maintenance-content">
                 <p>Maintain in progress</p>
-                <img src={loadingGif} alt="Loading..." />
+                <Helix
+                    size="75"
+                    speed="2.5"
+                    color="white"
+                />
               </div>
             </div>
         )}

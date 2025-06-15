@@ -5,6 +5,7 @@ import { beginCell } from '@ton/core';
 
 import gift1 from './assets/gift-colored.webp'
 import gift2 from './assets/gift-gold.webp'
+import gift3 from './assets/gift-gray.webp'
 
 import calendarGif from './gifs/calendar.gif';
 import candyGif    from './gifs/candy.gif';
@@ -218,6 +219,20 @@ function Menu({ onStandard, onUniqueCollectible }) {
                         <img src={ton} alt="" className="gift-price-ton-icon" />
                         <span className="gift-price-value">3</span>
                     </div>
+                </div>
+            </div>
+
+            <div className="gift-block">
+                <img src={gift3} alt="Gold gift" className="gift-img" />
+                <div className="gift-label-container">
+                    <h1 className="label">Upcoming Soon..</h1>
+                </div>
+            </div>
+
+            <div className="gift-block">
+                <img src={gift3} alt="Gold gift" className="gift-img" />
+                <div className="gift-label-container">
+                    <h1 className="label">Upcoming Soon..</h1>
                 </div>
             </div>
 

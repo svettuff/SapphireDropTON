@@ -6,7 +6,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100%;
-  margin-top: 25px;
+  margin-top: 30px;
 }
 
 .container {
@@ -75,7 +75,6 @@ body {
   position: relative;
   top: -2px;
 }
-
 
 .spin-gift-block {
   background: rgba(255, 255, 255, 0.04);
