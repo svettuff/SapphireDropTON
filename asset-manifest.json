@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/SapphireDropTON/static/css/main.338e94f4.css",
-    "main.js": "/SapphireDropTON/static/js/main.0a7ce490.js",
+    "main.js": "/SapphireDropTON/static/js/main.f3f7a20d.js",
     "static/media/rose.gif": "/SapphireDropTON/static/media/rose.9b1fbe3aeaa02546959d.gif",
     "static/media/flowers.gif": "/SapphireDropTON/static/media/flowers.c210d18c3a7fa2dd6824.gif",
     "static/media/teddy.gif": "/SapphireDropTON/static/media/teddy.13edee4b70086beb4118.gif",
@@ -16,6 +16,7 @@
     "static/media/diamond.gif": "/SapphireDropTON/static/media/diamond.804f35de11ecb20e446a.gif",
     "static/media/gift-gold.webp": "/SapphireDropTON/static/media/gift-gold.fdabe5f9fe3e14405977.webp",
     "static/media/gift-colored.webp": "/SapphireDropTON/static/media/gift-colored.ed8aeb6628d5c9f33418.webp",
+    "static/media/gift-gray.webp": "/SapphireDropTON/static/media/gift-gray.57e63707c186133c077e.webp",
     "static/media/rose.webp": "/SapphireDropTON/static/media/rose.4de908cdee9314c6f3a3.webp",
     "static/media/flowers.webp": "/SapphireDropTON/static/media/flowers.e921054d93ff94296840.webp",
     "static/media/ton.webp": "/SapphireDropTON/static/media/ton.56739877675de2675c5d.webp",
@@ -32,10 +33,10 @@
     "static/media/diamond.webp": "/SapphireDropTON/static/media/diamond.c2cf2e02a7e93dfbc380.webp",
     "index.html": "/SapphireDropTON/index.html",
     "main.338e94f4.css.map": "/SapphireDropTON/static/css/main.338e94f4.css.map",
-    "main.0a7ce490.js.map": "/SapphireDropTON/static/js/main.0a7ce490.js.map"
+    "main.f3f7a20d.js.map": "/SapphireDropTON/static/js/main.f3f7a20d.js.map"
   },
   "entrypoints": [
     "static/css/main.338e94f4.css",
-    "static/js/main.0a7ce490.js"
+    "static/js/main.f3f7a20d.js"
   ]
 }
