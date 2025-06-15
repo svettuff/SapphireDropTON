@@ -116,7 +116,7 @@ export default function SpinStandard({ onBack }) {
                 throw new Error(data.error || 'No reward received');
             }
 
-            const rewardType = data.reward;
+            const { reward: rewardType, gift_id: giftId } = data;
             const pick = rewards.find((r) => r.type === rewardType);
 
             if (!pick) {
@@ -125,7 +125,7 @@ export default function SpinStandard({ onBack }) {
                 return;
             }
 
-            setWinner(pick);
+            setWinner({ ...pick, giftId });
 
             const arr = Array.from({ length: 100 }, () => randomReward());
             arr[95] = pick;
@@ -137,13 +137,40 @@ export default function SpinStandard({ onBack }) {
         }
     };
 
-    const handleCloseModal = () => {
+    const handleCloseErrorModal = () => {
+        setShowBalanceErrorModal(false);
+    };
+
+    const handleSellGift = async (giftId) => {
+        const tg = window.Telegram?.WebApp;
+        const userId = tg?.initDataUnsafe?.user?.id;
+
+        if (!userId || !giftId) return;
+
+        await fetch('https://sapphiredrop.ansbackend.ch/sell-gift', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: userId, gift_id: giftId }),
+        });
+
         setShowModal(false);
         setWinner(null);
     };
 
-    const handleCloseErrorModal = () => {
-        setShowBalanceErrorModal(false);
+    const handleWithdrawGift = async (giftId) => {
+        const tg = window.Telegram?.WebApp;
+        const userId = tg?.initDataUnsafe?.user?.id;
+
+        if (!userId || !giftId) return;
+
+        await fetch('https://sapphiredrop.ansbackend.ch/withdraw-gift', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: userId, gift_id: giftId }),
+        });
+
+        setShowModal(false);
+        setWinner(null);
     };
 
     return (
@@ -195,9 +222,15 @@ export default function SpinStandard({ onBack }) {
                         <h2>Congratulations!</h2>
                         <img src={winner.img} alt={winner.type} className="modal-img" />
                         <p className="modal-text">Your gift has been sent to you</p>
-                        <button onClick={handleCloseModal} className="try-again-btn">
-                            Try again
-                        </button>
+
+                        <div className="modal-buttons">
+                            <button className="try-again-btn" onClick={() => handleSellGift(winner.giftId)}>
+                                Sell
+                            </button>
+                            <button className="try-again-btn" onClick={() => handleWithdrawGift(winner.giftId)}>
+                                Withdraw
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}

@@ -35,6 +35,7 @@ function SpinUniqueCollectible({ onBack }) {
     const [showGift, setShowGift] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [winner, setWinner] = useState(null);
+    const [showBalanceErrorModal, setShowBalanceErrorModal] = useState(false);
 
     const reelRef = useRef(null);
     const maskRef = useRef(null);
@@ -83,94 +84,91 @@ function SpinUniqueCollectible({ onBack }) {
         return () => clearTimeout(id);
     }, [spinning, strip, winner]);
 
-    const invoiceHandlerRef = useRef(null);
-
     const startSpin = async () => {
         if (spinning) return;
         setSpinning(true);
 
         try {
-            const res  = await fetch(
-                'https://sapphiredrop.ansbackend.ch/generate-invoice-unique-collectible', // TODO
-                { method: 'POST', headers: { 'Content-Type': 'application/json' } }
-            );
-            const data = await res.json();
-            if (!data.invoiceLink) throw new Error(data.error || 'No invoice link');
-
-            let link = data.invoiceLink;
-            if (!/^https?:\/\//i.test(link)) {
-                link = link.startsWith('$')
-                    ? `https://t.me/${link}`
-                    : `https://t.me/invoice/${link}`;
+            const tg = window.Telegram?.WebApp;
+            if (!tg || !tg.initDataUnsafe?.user?.id) {
+                throw new Error('Telegram user ID not found');
             }
 
-            if (!window.Telegram?.WebApp) {
-                window.open(link, '_blank');
+            const userId = tg.initDataUnsafe.user.id;
+
+            const res = await fetch(
+                'https://sapphiredrop.ansbackend.ch/unlock-collectible',
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId }),
+                }
+            );
+
+            if (res.status === 402) {
+                setShowBalanceErrorModal(true);
+                return;
+            }
+
+            const data = await res.json();
+
+            if (!data.reward) {
+                throw new Error(data.error || 'No reward received');
+            }
+
+            const { reward: rewardType, gift_id: giftId } = data;
+            const pick = rewards.find((r) => r.type === rewardType);
+
+            if (!pick) {
+                console.error('Unknown reward:', rewardType);
                 setSpinning(false);
                 return;
             }
 
-            if (invoiceHandlerRef.current) {
-                window.Telegram.WebApp.offEvent(
-                    'invoiceClosed',
-                    invoiceHandlerRef.current
-                );
-            }
+            setWinner({ ...pick, giftId });
 
-            const onInvoiceClosed = async (event) => {
-                window.Telegram.WebApp.offEvent('invoiceClosed', onInvoiceClosed);
-                invoiceHandlerRef.current = null;
+            const arr = Array.from({ length: 100 }, () => randomReward());
+            arr[95] = pick;
 
-                if (event.status !== 'paid') {
-                    setSpinning(false);
-                    return;
-                }
-
-                const maxTries = 6;
-                const pauseMs  = 800;
-                let   reward   = null;
-
-                for (let i = 0; i < maxTries; i++) {
-                    try {
-                        const r = await fetch(
-                            `https://sapphiredrop.ansbackend.ch/get-gift?payload=${data.payload}`
-                        );
-                        if (r.ok) {
-                            const j = await r.json();
-                            if (j.reward) { reward = j.reward; break; }
-                        }
-                    } catch { /* network error */ }
-                    await new Promise((ok) => setTimeout(ok, pauseMs));
-                }
-
-                if (!reward) {
-                    console.warn('Reward not found yet');
-                    setSpinning(false);
-                    return;
-                }
-
-                const pick = rewards.find((r) => r.type === reward);
-                if (!pick) { console.error('Unknown reward', reward); setSpinning(false); return; }
-
-                setWinner(pick);
-                const arr = Array.from({ length: 100 }, () => randomReward());
-                arr[95] = pick;
-
-                setStrip(arr);
-                setShowGift(false);
-            };
-
-            invoiceHandlerRef.current = onInvoiceClosed;
-            window.Telegram.WebApp.onEvent('invoiceClosed', onInvoiceClosed);
-
-            window.Telegram.WebApp.openInvoice(link);
+            setStrip(arr);
+            setShowGift(false);
         } catch (err) {
             console.error('startSpin error:', err);
-            setSpinning(false);
         }
     };
 
-    const handleCloseModal = () => {
+    const handleCloseErrorModal = () => {
+        setShowBalanceErrorModal(false);
+    };
+
+    const handleSellGift = async (giftId) => {
+        const tg = window.Telegram?.WebApp;
+        const userId = tg?.initDataUnsafe?.user?.id;
+
+        if (!userId || !giftId) return;
+
+        await fetch('https://sapphiredrop.ansbackend.ch/sell-gift', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: userId, gift_id: giftId }),
+        });
+
+        setShowModal(false);
+        setWinner(null);
+    };
+
+    const handleWithdrawGift = async (giftId) => {
+        const tg = window.Telegram?.WebApp;
+        const userId = tg?.initDataUnsafe?.user?.id;
+
+        if (!userId || !giftId) return;
+
+        await fetch('https://sapphiredrop.ansbackend.ch/withdraw-gift', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id: userId, gift_id: giftId }),
+        });
+
         setShowModal(false);
         setWinner(null);
     };
@@ -195,7 +193,7 @@ function SpinUniqueCollectible({ onBack }) {
                 )}
             </div>
 
-            <button className="spin-button" disabled={spinning}>
+            <button className="spin-button" onClick={startSpin} disabled={spinning}>
                 {spinning ? 'Spinning…' : 'Unlock for 3'}
                 {!spinning && (
                     <img src={ton} alt="ton" className="ton-icon-button" />
@@ -224,8 +222,26 @@ function SpinUniqueCollectible({ onBack }) {
                         <h2>Congratulations!</h2>
                         <img src={winner.img} alt={winner.type} className="modal-img" />
                         <p className="modal-text">Your gift has been sent to you</p>
-                        <button onClick={handleCloseModal} className="try-again-btn">
-                            Try again
+
+                        <div className="modal-buttons">
+                            <button className="try-again-btn" onClick={() => handleSellGift(winner.giftId)}>
+                                Sell
+                            </button>
+                            <button className="try-again-btn" onClick={() => handleWithdrawGift(winner.giftId)}>
+                                Withdraw
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {showBalanceErrorModal && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <h2>Insufficient Balance</h2>
+                        <p className="modal-text">You need at least 3 TON.</p>
+                        <button onClick={handleCloseErrorModal} className="try-again-btn">
+                            Got it
                         </button>
                     </div>
                 </div>
