@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/SapphireDropTON/static/css/main.59868706.css",
-    "main.js": "/SapphireDropTON/static/js/main.c9822afa.js",
+    "main.css": "/SapphireDropTON/static/css/main.c6190b5a.css",
+    "main.js": "/SapphireDropTON/static/js/main.1fd005da.js",
     "static/media/rose.gif": "/SapphireDropTON/static/media/rose.9b1fbe3aeaa02546959d.gif",
     "static/media/flowers.gif": "/SapphireDropTON/static/media/flowers.c210d18c3a7fa2dd6824.gif",
     "static/media/teddy.gif": "/SapphireDropTON/static/media/teddy.13edee4b70086beb4118.gif",
@@ -31,11 +31,11 @@
     "static/media/eye.webp": "/SapphireDropTON/static/media/eye.5af769d752b3e3bb8c03.webp",
     "static/media/diamond.webp": "/SapphireDropTON/static/media/diamond.c2cf2e02a7e93dfbc380.webp",
     "index.html": "/SapphireDropTON/index.html",
-    "main.59868706.css.map": "/SapphireDropTON/static/css/main.59868706.css.map",
-    "main.c9822afa.js.map": "/SapphireDropTON/static/js/main.c9822afa.js.map"
+    "main.c6190b5a.css.map": "/SapphireDropTON/static/css/main.c6190b5a.css.map",
+    "main.1fd005da.js.map": "/SapphireDropTON/static/js/main.1fd005da.js.map"
   },
   "entrypoints": [
-    "static/css/main.59868706.css",
-    "static/js/main.c9822afa.js"
+    "static/css/main.c6190b5a.css",
+    "static/js/main.1fd005da.js"
   ]
 }
