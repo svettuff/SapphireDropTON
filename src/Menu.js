@@ -127,12 +127,23 @@ function Balance() {
     const [tons, setTons] = useState(0);
     const [open, setOpen] = useState(false);
 
+    const tg = window.Telegram?.WebApp;
+    const userId = tg?.initDataUnsafe?.user?.id;
+
+    useEffect(() => {
+        if (!userId) return;
+        fetch(`https://sapphiredrop.ansbackend.ch/balance?user_id=${userId}`)
+            .then(r => r.json())
+            .then(d => setTons(Number(d.balance ?? 0)))
+            .catch(console.error);
+    }, [userId]);
+
     return (
         <>
             <div className="balance-block">
                 <div className="balance-price">
                     <img src={ton} alt="TON" className="balance-ton-icon" />
-                    <span className="balance-count">{tons}</span>
+                    <span className="balance-count">{tons.toFixed(1)}</span>
                 </div>
 
                 <button
@@ -145,10 +156,7 @@ function Balance() {
             <TopUpModal
                 open={open}
                 onClose={() => setOpen(false)}
-                onSubmit={amount => {
-                    setTons(p => p + amount);
-                    setOpen(false);
-                }}
+                onSubmit={() => setOpen(false)}
             />
         </>
     );
