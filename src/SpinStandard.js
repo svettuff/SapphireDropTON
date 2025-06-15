@@ -138,6 +138,7 @@ export default function SpinStandard({ onBack }) {
     };
 
     const handleCloseErrorModal = () => {
+        setSpinning(false);
         setShowBalanceErrorModal(false);
     };
 

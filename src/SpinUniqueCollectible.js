@@ -138,6 +138,7 @@ function SpinUniqueCollectible({ onBack }) {
     };
 
     const handleCloseErrorModal = () => {
+        setSpinning(false);
         setShowBalanceErrorModal(false);
     };
 
