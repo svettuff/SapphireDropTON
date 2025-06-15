@@ -195,7 +195,7 @@ function SpinUniqueCollectible({ onBack }) {
                 )}
             </div>
 
-            <button className="spin-button" onClick={startSpin} disabled={spinning}>
+            <button className="spin-button" disabled={spinning}>
                 {spinning ? 'Spinning…' : 'Unlock for 500'}
                 {!spinning && (
                     <img src={ton} alt="ton" className="ton-icon-button" />

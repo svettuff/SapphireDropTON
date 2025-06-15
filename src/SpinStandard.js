@@ -195,7 +195,7 @@ export default function SpinStandard({ onBack }) {
                 )}
             </div>
 
-            <button className="spin-button" onClick={startSpin} disabled={spinning}>
+            <button className="spin-button" disabled={spinning}>
                 {spinning ? 'Spinning…' : 'Unlock for 30'}
                 {!spinning && (
                     <img src={ton} alt="ton" className="ton-icon-button" />
