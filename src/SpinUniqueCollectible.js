@@ -221,7 +221,6 @@ function SpinUniqueCollectible({ onBack }) {
                     <div className="modal">
                         <h2>Congratulations!</h2>
                         <img src={winner.img} alt={winner.type} className="modal-img" />
-                        <p className="modal-text">Your gift has been sent to you</p>
 
                         <div className="modal-buttons">
                             <button className="try-again-btn" onClick={() => handleSellGift(winner.giftId)}>
