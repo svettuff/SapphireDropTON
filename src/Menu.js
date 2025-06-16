@@ -21,6 +21,8 @@ import trophyGif   from './gifs/trophy.gif';
 import diamondGif  from './gifs/diamond.gif';
 import hatGif      from './gifs/hat.gif';
 
+import promoIcon from './assets/promoIcon.webp';
+
 import ton from "./assets/ton.webp";
 
 const rewardGifs = {
@@ -124,9 +126,79 @@ function TopUpModal({ open, onClose, onSubmit }) {
     );
 }
 
+function CodeModal({ open, onClose, onSubmit }) {
+    const [code, setCode] = useState('');
+    const [placeholder, setPlaceholder] = useState('Enter promo code');
+
+    useEffect(() => {
+        window.Telegram?.WebApp?.ready();
+    }, []);
+
+    useEffect(() => {
+        if (open) {
+            setCode('');
+            setPlaceholder('Enter promo code');
+        }
+    }, [open]);
+
+    if (!open) return null;
+
+    const handleSubmit = async () => {
+        const tg = window.Telegram.WebApp;
+        const userId = tg?.initDataUnsafe?.user?.id;
+
+        if (!userId || !code.trim()) return;
+
+        try {
+            const url = new URL('https://sapphiredrop.ansbackend.ch/redeem_code');
+            url.searchParams.append('user_id', userId);
+            url.searchParams.append('code', code.trim());
+
+            const res = await fetch(url);
+            const data = await res.json();
+
+            if (!res.ok || data.error) {
+                setCode('');
+                setPlaceholder(data.error || `Error: HTTP ${res.status}`);
+                return;
+            }
+
+            onSubmit(code);
+            setCode('');
+            setPlaceholder('Enter promo code');
+            onClose();
+        } catch (err) {
+            console.error('Redeem failed:', err);
+            setCode('');
+            setPlaceholder('Network error');
+        }
+    };
+
+    return (
+        <div className="modal-overlay" onClick={onClose}>
+            <div className="modal topup-modal" onClick={e => e.stopPropagation()}>
+                <div className="input-wrapper">
+                    <input
+                        type="text"
+                        placeholder={placeholder}
+                        value={code}
+                        onChange={e => setCode(e.target.value)}
+                        className="topup-input"
+                    />
+                </div>
+
+                <button className="topup-btn" onClick={handleSubmit}>
+                    Redeem Code
+                </button>
+            </div>
+        </div>
+    );
+}
+
 function Balance() {
     const [tons, setTons] = useState(0);
     const [open, setOpen] = useState(false);
+    const [codeOpen, setCodeOpen] = useState(false);
 
     const tg = window.Telegram?.WebApp;
     const userId = tg?.initDataUnsafe?.user?.id;
@@ -152,12 +224,26 @@ function Balance() {
                     onClick={() => setOpen(true)}
                     aria-label="TopUp"
                 ></button>
+
+                <button
+                    className="redeem-code-button"
+                    onClick={() => setCodeOpen(true)}
+                    aria-label="RedeemCode"
+                >
+                    <img src={promoIcon} alt="Promo" className="balance-icon-img" />
+                </button>
             </div>
 
             <TopUpModal
                 open={open}
                 onClose={() => setOpen(false)}
                 onSubmit={() => setOpen(false)}
+            />
+
+            <CodeModal
+                open={codeOpen}
+                onClose={() => setCodeOpen(false)}
+                onSubmit={() => setCodeOpen(false)}
             />
         </>
     );

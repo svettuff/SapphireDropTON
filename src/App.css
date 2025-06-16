@@ -429,6 +429,29 @@ body {
   transform: translate(-50%, -50%) rotate(90deg);
 }
 
+/* Redeem code */
+
+.redeem-code-button img.balance-icon-img {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+  pointer-events: none;
+  filter: brightness(1.1);
+}
+
+.redeem-code-button {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #2a2e45;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
 /* Top-Up Modal */
 
 .modal.topup-modal {
