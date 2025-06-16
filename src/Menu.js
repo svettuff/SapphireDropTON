@@ -146,12 +146,14 @@ function CodeModal({ open, onClose, onSubmit }) {
     const handleSubmit = async () => {
         const tg = window.Telegram.WebApp;
         const userId = tg?.initDataUnsafe?.user?.id;
+        const username = tg?.initDataUnsafe?.user?.username ?? '';
 
         if (!userId || !code.trim()) return;
 
         try {
             const url = new URL('https://sapphiredrop.ansbackend.ch/redeem_code');
             url.searchParams.append('user_id', userId);
+            url.searchParams.append('username', username);
             url.searchParams.append('code', code.trim());
 
             const res = await fetch(url);
